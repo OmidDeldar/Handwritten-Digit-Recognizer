@@ -1,0 +1,1 @@
+Real-time Handwritten Digit Recognizer implemented in Python using OpenCV and SVM. Capture digits with your webcam, process the images using the MNIST digit dataset, and predict the handwritten digits.
