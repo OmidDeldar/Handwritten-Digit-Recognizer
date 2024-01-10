@@ -1,10 +1,13 @@
-# Import the modules
 import joblib
 from sklearn import datasets
 from sklearn.model_selection import train_test_split
 from skimage.feature import hog
 from sklearn.svm import LinearSVC
 import numpy as np
+from sklearn.metrics import ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
+from sklearn import metrics
+from matrix_confusion import plot_confusion_matrix_train
 
 # Load the MNIST dataset (subset of the Digits dataset.)
 mnist = datasets.fetch_openml("mnist_784", as_frame=False, parser='liac-arff')
@@ -25,6 +28,9 @@ X_train, X_test, y_train, y_test = train_test_split(
 # Train the Linear SVM with dual set to False
 clf = LinearSVC(dual=False)
 clf.fit(X_train, y_train)
-
+predicted = clf.predict(X_test)
 # Save the classifier
 joblib.dump(clf, "digits_cls.pkl", compress=3)
+
+# Compute and display the confusion matrix for the test set
+plot_confusion_matrix_train(y_test, predicted)
