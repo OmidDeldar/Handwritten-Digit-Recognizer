@@ -8,6 +8,7 @@ from sklearn.metrics import ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 from sklearn import metrics
 from matrix_confusion import plot_confusion_matrix_train
+from sklearn.metrics import accuracy_score
 
 # Load the MNIST dataset (subset of the Digits dataset.)
 mnist = datasets.fetch_openml("mnist_784", as_frame=False, parser='liac-arff')
@@ -31,6 +32,8 @@ clf.fit(X_train, y_train)
 predicted = clf.predict(X_test)
 # Save the classifier
 joblib.dump(clf, "digits_cls.pkl", compress=3)
-
+# accuracy percentage
+print("accuracy_score: ")
+print(accuracy_score(y_test, predicted))
 # Compute and display the confusion matrix for the test set
 plot_confusion_matrix_train(y_test, predicted)
