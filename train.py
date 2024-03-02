@@ -4,9 +4,6 @@ from sklearn.model_selection import train_test_split
 from skimage.feature import hog
 from sklearn.svm import LinearSVC
 import numpy as np
-from sklearn.metrics import ConfusionMatrixDisplay
-import matplotlib.pyplot as plt
-from sklearn import metrics
 from matrix_confusion import plot_confusion_matrix_train
 from sklearn.metrics import accuracy_score
 
@@ -14,8 +11,9 @@ from sklearn.metrics import accuracy_score
 mnist = datasets.fetch_openml("mnist_784", as_frame=False, parser='liac-arff')
 features = np.array(mnist.data.astype(int))
 labels = np.array(mnist.target.astype(int))
-
+# Histogram of Oriented Gradients
 list_hog_fd = []
+# Iterates through each feature (image) in the dataset.
 for feature in features:
     fd, _ = hog(feature.reshape((28, 28)), orientations=9, pixels_per_cell=(
         14, 14), cells_per_block=(1, 1), visualize=True)
